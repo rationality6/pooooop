@@ -10,79 +10,49 @@ class OpeningScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("ground", "assets/ground.png");
+    this.load.image("background", "assets/background.webp");
+    this.load.image("poop", "assets/poop.png");
 
-    this.load.image("lee", "assets/lee_final.png");
+    this.poops = this.physics.add.group({
+      collideWorldBounds: true,
+    });
   }
 
-  createLee() {
-    [-360, -720, -1040, -1140];
-    const lee = this.physics.add.image(-360, 310, "lee");
-    lee.displayHeight = 80;
-    lee.displayWidth = 80;
-    lee.setFlipX(true);
-
-    const lee2 = this.physics.add.image(-720, 330, "lee");
-    lee2.displayHeight = 80;
-    lee2.displayWidth = 80;
-    lee2.setFlipX(true);
-
-    const lee3 = this.physics.add.image(-1040, 350, "lee");
-    lee3.displayHeight = 80;
-    lee3.displayWidth = 80;
-    lee3.setFlipX(true);
-
-    const lee4 = this.physics.add.image(-540, 360, "lee");
-    lee4.displayHeight = 80;
-    lee4.displayWidth = 80;
-    lee4.setFlipX(true);
-
-    this.tweens.add({
-      targets: lee,
-      x: 1360,
-      flipX: true,
-      yoyo: true,
-      duration: 4000,
-      repeat: -1,
-    });
-    this.tweens.add({
-      targets: lee2,
-      x: 1100,
-      flipX: true,
-      yoyo: true,
-      duration: 4000,
-      repeat: -1,
-    });
-    this.tweens.add({
-      targets: lee3,
-      x: 1200,
-      flipX: true,
-      yoyo: true,
-      duration: 4000,
-      repeat: -1,
-    });
-    this.tweens.add({
-      targets: lee4,
-      x: 1300,
-      flipX: true,
-      yoyo: true,
-      duration: 4000,
-      repeat: -1,
-    });
+  random_poop_sound() {
+    let poop_sounds = ["poop_sound0", "poop_sound1"];
   }
 
   create() {
-    this.add.tileSprite(0, this.gemeHeight, 1000, 26, "ground").setOrigin(0, 3);
-
-    this.createLee();
-
-    const logo = this.add.text(210, 210, "잼잼 이잼 이잼~", {
-      fontSize: "40px",
-      color: "#000",
-    });
+    let background = this.add.image(0, 0, "background").setOrigin(0, 0);
 
     this.input.on("pointerdown", () => {
-      this.scene.start("GameScene");
+      new Audio("assets/sounds/poop_sound0.mp3").play();
+      new Audio("assets/sounds/poop_sound1.mp3").play();
+
+      const random_poops = Math.round(Math.random() * 2);
+      this.createPoop(random_poops);
+    });
+  }
+  createPoop(count: number) {
+    [...Array(count)].forEach((i) => {
+      let randomXposision = Math.round(Math.random() * 20) + 100;
+      let poop = this.physics.add.sprite(randomXposision, 400, "poop");
+      poop.displayWidth = 60;
+      poop.displayHeight = 60;
+
+      poop.body.velocity.x = Math.round(Math.random() * 5) * 200;
+      poop.body.velocity.y = 400;
+
+      poop.setBounce(0.7, 0.7);
+      poop.setCollideWorldBounds(true);
+      setTimeout(() => {
+        poop.destroy();
+      }, 2000);
+
+      // this.poops.add(poop);
+      // this.physics.add.collider(poop, this.poops, () => {
+      //   new Audio("./assets/sounds/hit.mp3").play();
+      // });
     });
   }
 }

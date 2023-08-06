@@ -15,10 +15,9 @@ class GameScene extends Phaser.Scene {
     this.load.image("lee", "assets/lee_final.png");
   }
 
-
   create() {
     this.add.tileSprite(0, this.gemeHeight, 1000, 26, "ground").setOrigin(0, 3);
   }
 }
 
-export default GameScene
+export default GameScene;
