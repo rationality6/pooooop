@@ -19,16 +19,17 @@ class OpeningScene extends Phaser.Scene {
   }
 
   random_poop_sound() {
-    let poop_sounds = ["poop_sound0", "poop_sound1"];
+    let random_poop_sound_string = ["poop_sound0", "poop_sound1"][
+      Math.round(Math.random() * 1)
+    ];
+    new Audio(`assets/sounds/${random_poop_sound_string}.mp3`).play();
   }
 
   create() {
     let background = this.add.image(0, 0, "background").setOrigin(0, 0);
 
     this.input.on("pointerdown", () => {
-      new Audio("assets/sounds/poop_sound0.mp3").play();
-      new Audio("assets/sounds/poop_sound1.mp3").play();
-
+      this.random_poop_sound()
       const random_poops = Math.round(Math.random() * 2);
       this.createPoop(random_poops);
     });
