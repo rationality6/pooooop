@@ -1,24 +1,24 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
-export default class Demo extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
   constructor() {
-    super('GameScene');
+    super("GameScene");
+  }
+
+  get gemeHeight() {
+    return this.game.config.height as number;
   }
 
   preload() {
-    this.load.image('logo', 'assets/phaser3-logo.png');
+    this.load.image("ground", "assets/ground.png");
+
+    this.load.image("lee", "assets/lee_final.png");
   }
+
 
   create() {
-    const logo = this.add.image(400, 70, 'logo');
-
-    this.tweens.add({
-      targets: logo,
-      y: 350,
-      duration: 1500,
-      ease: 'Sine.inOut',
-      yoyo: true,
-      repeat: -1
-    });
+    this.add.tileSprite(0, this.gemeHeight, 1000, 26, "ground").setOrigin(0, 3);
   }
 }
+
+export default GameScene
