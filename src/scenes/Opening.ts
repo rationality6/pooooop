@@ -48,6 +48,8 @@ class OpeningScene extends Phaser.Scene {
     setInterval(() => {
       this.poooooping();
     }, 2000);
+
+    this.add.text(20, 20, "Click to poop!", {})
   }
   createPoop(count: number) {
     [...Array(count)].forEach((i) => {
