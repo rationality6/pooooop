@@ -5,14 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "build": "vite build --base=./",
+    "serve": "vite preview",
+    "publish": "gh-pages -d dist -b gh-page"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/geocine/phaser3-rollup-typescript.git"
-  },
-  "author": "Aivan Monceller",
+  "author": "Hyun Ahn",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/geocine/phaser3-rollup-typescript/issues"
@@ -25,6 +22,6 @@
     "@rollup/plugin-replace": "^4.0.0",
     "phaser": "^3.55.2",
     "typescript": "^4.6.4",
-    "vite": "^2.9.13"
+    "vite": "^4.4.9"
   }
 }
