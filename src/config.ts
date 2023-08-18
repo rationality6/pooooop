@@ -7,6 +7,10 @@ export default {
   height: 470,
   scale: {
     mode: Phaser.Scale.FIT,
+    max: {
+      width: 800,
+      height: 500,
+    },
   },
   physics: {
     default: "arcade",
